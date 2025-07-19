@@ -1,6 +1,7 @@
 #include "parsing.h"
 
 
+// finish c f parsing 
 void check_if_in_range(int color)
 {
     if(!(color >= 0 && color <= 255))
@@ -26,7 +27,7 @@ int f_c_color_helpr(t_utils *util, char *file)
     {
         if (file[i] == ',')
             counter++;
-            i++;
+        i++;
     }
     if (counter != 2)
     {
@@ -34,7 +35,18 @@ int f_c_color_helpr(t_utils *util, char *file)
         exit(2);
     }
     split = ft_split(file, " ");
+    if (!split || !split[1])
+    {
+        write(2, "Invalid color format\n", 21);
+        exit(2);
+    }
     split1 = ft_split(split[1], ",");
+    if (!split1 || !split1[0] || !split1[1] || !split1[2])
+    {
+        free_split(split);
+        write(2, "Invalid color format\n", 21);
+        exit(2);
+    }
     if (file[0] == 'C')
     {
         util->c_color[0] = ft_atoi(split1[0]);
