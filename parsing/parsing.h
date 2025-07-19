@@ -6,8 +6,8 @@
 
 typedef struct s_utils
 {
-    char **c_color;
-    char **f_color;
+    int *c_color;
+    int *f_color;
     char **map;
     int no_fd;
     int so_fd;

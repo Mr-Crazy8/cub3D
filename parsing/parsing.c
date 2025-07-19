@@ -77,6 +77,14 @@ void parser(char *str)
     int fd;
     util =  malloc(sizeof(t_utils));
 
+    util->c_color = malloc(3 * sizeof(int));
+    util->f_color = malloc(3 * sizeof(int));
+    util->no_fd = -1;
+    util->so_fd = -1;
+    util->ea_fd = -1;
+    util->we_fd = -1;
+    util->map = NULL;
+
     fd = check_file(str);
     char **file = read_file(fd, str);
     extract_and_pars_the_texture(util, file);
