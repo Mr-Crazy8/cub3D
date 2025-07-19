@@ -1,6 +1,29 @@
 #include "parsing.h"
 
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
 
+	i = 0;
+	while (i < n && s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
+	{
+		i++;
+	}
+	if (i == n)
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+void free_split(char **split)
+{
+    int i = 0;
+
+    while (split[i])
+        {
+            free(split[i]);
+            i++;
+        }
+    free(split);
+}
 void extract_and_pars_the_texture(t_utils *util, char **file)
 {
     int i = 0;
@@ -15,12 +38,12 @@ void extract_and_pars_the_texture(t_utils *util, char **file)
 
     while (file[i])
     {
-        if(strchr(file[i], "./") != NULL)
+        if(strnstr(file[i], "./", strlen(file[i])) != NULL) 
         {
-            if(strchr(file[i], "NO") != NULL
-            || strchr(file[i], "SO") != NULL
-            || strchr(file[i], "EA") != NULL
-            || strchr(file[i], "WE") != NULL)
+            if(ft_strncmp(file[i], "NO", 2) == 0
+            || ft_strncmp(file[i], "SO", 2) == 0
+            || ft_strncmp(file[i], "EA", 2) == 0
+            || ft_strncmp(file[i], "WE", 2) == 0)
             {
                 texture = ft_split(file[i], " ");
                 fd = open(texture[1], O_RDONLY);
@@ -29,30 +52,39 @@ void extract_and_pars_the_texture(t_utils *util, char **file)
                 {
                     util->no_fd = fd;
                     done_no = 1;
+                    free_split(texture);
                 }
                 else if (strcmp(texture[0], "SO") == 0 && done_so == 0)
                 {
                     util->so_fd = fd;
                     done_so = 1;
+                    free_split(texture);
                 }
                 else if (strcmp(texture[0], "EA") == 0 && done_ea == 0)
                 {
                     util->ea_fd = fd;
                     done_ea = 1;
+                    free_split(texture);
                 }
                 else if (strcmp(texture[0], "WE") == 0 && done_we == 0)
                 {
                     util->we_fd = fd;
                     done_we = 1;
+                    free_split(texture);
                 }
-                if (done_ea > 1 || done_no > 1 || done_so > 1 || done_we > 1)
-                {
+               else if ((strcmp(texture[0], "NO") == 0 && done_no == 1)
+                    || (strcmp(texture[0], "SO") == 0 && done_so == 1)
+                    || (strcmp(texture[0], "EA") == 0 && done_ea == 1)
+                    || (strcmp(texture[0], "WE") == 0 && done_we == 1))
+                    {
                     write(2, "Duplicate identifier\n", 22);
+                    free_split(texture);
                     exit(2);
-                }
+                    }
                 else
                 {
                     write(2, "not valide identifier\n", 23);
+                    free_split(texture);
                     exit(2);
                 }
             }

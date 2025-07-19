@@ -25,5 +25,6 @@ void check_line(char *line);
 void read_map(int fd);
 void parser(char *str);
 char	**ft_split(char const *s, char c);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif
