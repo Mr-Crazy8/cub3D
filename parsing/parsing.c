@@ -4,7 +4,7 @@
 int check_file(char *str)
 {
     int fd;
-    int valid_extension = 0;
+    // int valid_extension = 0;
 
     fd = open(str, O_RDONLY);
     if(fd == -1)
@@ -12,7 +12,7 @@ int check_file(char *str)
         write(2, "File doesn't exist or can't be opened\n", 39);
         exit(2);
     }
-    int i = 0;
+    // int i = 0;
     size_t len = strlen(str);
     if (len < 4 || strcmp(str + len - 4, ".cub") != 0)
     {
@@ -68,9 +68,6 @@ char **read_file(int fd, char *str)
     return file;
 }
 
-
-
-
 void parser(char *str)
 {
     t_utils *util;
@@ -95,6 +92,7 @@ void parser(char *str)
 
 int main(int argc, char *argv[])
 {
+    (void)argc;
 
     parser(argv[1]);
 

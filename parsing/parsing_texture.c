@@ -27,7 +27,7 @@ void free_split(char **split)
 void extract_and_pars_the_texture(t_utils *util, char **file)
 {
     int i = 0;
-    int j = 0;
+    // int j = 0;
     char **texture;
     int fd;
 
@@ -45,7 +45,9 @@ void extract_and_pars_the_texture(t_utils *util, char **file)
             || ft_strncmp(file[i], "EA", 2) == 0
             || ft_strncmp(file[i], "WE", 2) == 0)
             {
-                texture = ft_split(file[i], " ");
+                texture = ft_split(file[i], ' ');
+                if (texture[1][strlen(texture[1]) - 1] == '\n')
+                    texture[1][strlen(texture[1]) - 1] = '\0';
                 fd = open(texture[1], O_RDONLY);
                 print_error(fd);
                 if(strcmp(texture[0], "NO") == 0 && done_no == 0)

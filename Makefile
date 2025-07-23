@@ -1,17 +1,18 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = philo_utlis_0.c philo_utlis_1.c philo_utlis_2.c philo_utlis_3.c  philo_utlis_4.c philo_utlis_5.c philo.c
+SRCS = parsing/ft_split.c  parsing/get_next_line.c  parsing/get_next_line_utils.c  parsing/parsing.c  parsing/parsing_floor_and_ceiling_color.c \
+		parsing/parsing_map.c  parsing/parsing_texture.c   parsing/parsing_utiles.c 
 OBJS = $(SRCS:.c=.o)
 
-NAME = philo
+NAME = cub3D
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.c philo.h
+%.o: %.c parsing.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

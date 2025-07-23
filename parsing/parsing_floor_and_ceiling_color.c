@@ -34,13 +34,13 @@ int f_c_color_helpr(t_utils *util, char *file)
         write(2, "not valide color for floor or ceiling\n", 39);
         exit(2);
     }
-    split = ft_split(file, " ");
+    split = ft_split(file, ' ');
     if (!split || !split[1])
     {
         write(2, "Invalid color format\n", 21);
         exit(2);
     }
-    split1 = ft_split(split[1], ",");
+    split1 = ft_split(split[1], ',');
     if (!split1 || !split1[0] || !split1[1] || !split1[2])
     {
         free_split(split);

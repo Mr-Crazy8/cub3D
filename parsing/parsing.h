@@ -2,7 +2,7 @@
 # define PARSING_H
 
 #include "get_next_line.h"
-
+#include <stdio.h>
 
 typedef struct s_utils
 {
@@ -24,7 +24,27 @@ void check_floor_and_ceiling_color(char *line);
 void check_line(char *line);
 void read_map(int fd);
 void parser(char *str);
+int check_file(char *str);
+void print_failed(void);
+int count_lines(char *str);
+char **read_file(int fd, char *str);
+void check_if_in_range(int color);
+int f_c_color_helpr(t_utils *util, char *file);
+void extract_and_pars_the_floor_and_ceiling_color(t_utils *util, char **file);
+long long start_of_map(char **file);
 char	**ft_split(char const *s, char c);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+void extract_and_pars_the_map(t_utils *util, char **file);
+void check_for_valid_character_in_map(char str);
+void check_first_line(char **str);
+int lent(char **str);
+void check_the_last_line(char **str);
+void pars_the_map_helper(t_utils *util);
+void pars_the_map(t_utils *util);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+void free_split(char **split);
+void extract_and_pars_the_texture(t_utils *util, char **file);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+int	ft_isdigit(int c);
 
 #endif
